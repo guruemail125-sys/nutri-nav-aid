@@ -3,124 +3,236 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, AlertCircle, CheckCircle, Info } from "lucide-react";
+import { Search, AlertCircle, CheckCircle, Info, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
+import { diseases, Disease } from "@/data/diseases";
 
 const SymptomChecker = () => {
   const [symptoms, setSymptoms] = useState("");
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<(Disease & { matchCount: number; probability: string })[]>([]);
+  const [showAllDiseases, setShowAllDiseases] = useState(true);
 
-  const mockResults = [
-    {
-      disease: "Common Cold",
-      probability: "High",
-      severity: "Low",
-      description: "A viral infection of your nose and throat",
-      remedies: ["Rest", "Stay hydrated", "Use over-the-counter cold medications", "Gargle with salt water"],
-      color: "success",
-    },
-    {
-      disease: "Seasonal Allergies",
-      probability: "Medium",
-      severity: "Low",
-      description: "Allergic reaction to pollen or environmental factors",
-      remedies: ["Antihistamines", "Avoid allergens", "Use air purifier", "Nasal sprays"],
-      color: "primary",
-    },
-    {
-      disease: "Viral Fever",
-      probability: "Medium",
-      severity: "Medium",
-      description: "Fever caused by viral infection",
-      remedies: ["Rest and fluids", "Fever-reducing medication", "Cool compress", "Monitor temperature"],
-      color: "accent",
-    },
-  ];
+  const matchSymptoms = (searchTerms: string) => {
+    if (!searchTerms.trim()) {
+      return [];
+    }
+
+    const terms = searchTerms.toLowerCase().split(/[\s,]+/).filter(term => term.length > 2);
+    const matchedDiseases = diseases
+      .map(disease => {
+        const matchCount = disease.symptoms.filter(symptom =>
+          terms.some(term => symptom.toLowerCase().includes(term))
+        ).length;
+        
+        let probability = "Low";
+        const matchPercentage = (matchCount / terms.length) * 100;
+        if (matchPercentage >= 70) probability = "High";
+        else if (matchPercentage >= 40) probability = "Medium";
+
+        return { ...disease, matchCount, probability };
+      })
+      .filter(disease => disease.matchCount > 0)
+      .sort((a, b) => b.matchCount - a.matchCount)
+      .slice(0, 10);
+
+    return matchedDiseases;
+  };
 
   const handleCheck = () => {
     if (!symptoms.trim()) {
       toast.error("Please enter your symptoms");
       return;
     }
-    setResults(mockResults);
-    toast.success("Analysis complete!");
+    const matched = matchSymptoms(symptoms);
+    if (matched.length === 0) {
+      toast.error("No matching diseases found. Try different symptoms.");
+      return;
+    }
+    setResults(matched);
+    setShowAllDiseases(false);
+    toast.success(`Found ${matched.length} potential matches!`);
   };
 
+  const handleClear = () => {
+    setSymptoms("");
+    setResults([]);
+    setShowAllDiseases(true);
+  };
+
+  const getSeverityColor = (severity: string) => {
+    switch (severity) {
+      case "Low": return "bg-success/10 text-success border-success/20";
+      case "Medium": return "bg-accent/10 text-accent border-accent/20";
+      case "High": return "bg-destructive/10 text-destructive border-destructive/20";
+      default: return "bg-primary/10 text-primary border-primary/20";
+    }
+  };
+
+  const getProbabilityColor = (probability: string) => {
+    switch (probability) {
+      case "High": return "bg-destructive/10 text-destructive";
+      case "Medium": return "bg-accent/10 text-accent";
+      case "Low": return "bg-muted text-muted-foreground";
+      default: return "bg-primary/10 text-primary";
+    }
+  };
+
+  const displayDiseases = showAllDiseases ? diseases : results;
+
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
-      <div className="mb-8 animate-fade-in">
-        <h1 className="text-4xl font-bold mb-2">Symptom Checker</h1>
-        <p className="text-muted-foreground">Analyze your symptoms and get potential health insights</p>
+    <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <div className="mb-8 animate-fade-in text-center">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4">
+          <TrendingUp className="h-4 w-4 text-primary" />
+          <span className="text-sm font-medium text-primary">AI-Powered Symptom Analysis</span>
+        </div>
+        <h1 className="text-4xl md:text-5xl font-bold mb-2">Intelligent Symptom Checker</h1>
+        <p className="text-muted-foreground text-lg">Search from over {diseases.length} diseases to identify potential conditions</p>
       </div>
 
-      <div className="space-y-6">
-        <Card className="p-6 animate-slide-up">
-          <div className="flex items-center gap-2 mb-4">
-            <AlertCircle className="h-5 w-5 text-accent" />
-            <span className="text-sm text-muted-foreground">
-              Note: This tool provides information only. Always consult a healthcare professional for diagnosis.
+      <div className="space-y-8">
+        <Card className="p-6 md:p-8 animate-slide-up bg-gradient-to-br from-card to-muted/20 border-primary/20">
+          <div className="flex items-center gap-2 mb-6">
+            <AlertCircle className="h-5 w-5 text-accent animate-pulse" />
+            <span className="text-sm text-muted-foreground font-medium">
+              This tool provides information only. Always consult a healthcare professional for diagnosis.
             </span>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex flex-col md:flex-row gap-4">
             <Input
-              placeholder="Enter your symptoms (e.g., fever, headache, cough)"
+              placeholder="Enter symptoms (e.g., fever, headache, cough, fatigue)"
               value={symptoms}
               onChange={(e) => setSymptoms(e.target.value)}
-              className="flex-1"
+              onKeyDown={(e) => e.key === "Enter" && handleCheck()}
+              className="flex-1 h-12 text-lg"
             />
-            <Button onClick={handleCheck} size="lg" className="gap-2">
-              <Search className="h-5 w-5" />
-              Check Symptoms
-            </Button>
+            <div className="flex gap-2">
+              <Button onClick={handleCheck} size="lg" className="gap-2 flex-1 md:flex-none">
+                <Search className="h-5 w-5" />
+                Analyze
+              </Button>
+              {!showAllDiseases && (
+                <Button onClick={handleClear} size="lg" variant="outline" className="flex-1 md:flex-none">
+                  Clear
+                </Button>
+              )}
+            </div>
           </div>
+
+          {!showAllDiseases && results.length > 0 && (
+            <div className="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/20">
+              <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                <CheckCircle className="h-4 w-4" />
+                Found {results.length} potential matches based on your symptoms
+              </div>
+            </div>
+          )}
         </Card>
 
-        {results.length > 0 && (
-          <div className="space-y-4 animate-fade-in">
-            <h2 className="text-2xl font-semibold">Possible Conditions</h2>
-            {results.map((result, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
-                <div className="flex justify-between items-start mb-4">
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl md:text-3xl font-bold">
+              {showAllDiseases ? "All Known Diseases" : "Matched Conditions"}
+            </h2>
+            {!showAllDiseases && (
+              <Badge variant="secondary" className="text-sm">
+                {results.length} Results
+              </Badge>
+            )}
+          </div>
+
+          <div className="grid gap-4">
+            {displayDiseases.map((disease, index) => (
+              <Card 
+                key={index} 
+                className="p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-muted/10"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold mb-2">{result.disease}</h3>
-                    <p className="text-muted-foreground mb-4">{result.description}</p>
-                  </div>
-                  <div className="flex gap-2">
-                    <Badge variant="secondary">
-                      Probability: {result.probability}
-                    </Badge>
-                    <Badge className={`bg-${result.color}/10 text-${result.color}`}>
-                      Severity: {result.severity}
-                    </Badge>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2 text-sm font-medium">
-                    <CheckCircle className="h-4 w-4 text-success" />
-                    Recommended Remedies:
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-2">
-                    {result.remedies.map((remedy: string, i: number) => (
-                      <div key={i} className="flex items-center gap-2 text-sm">
-                        <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
-                        <span>{remedy}</span>
+                    <div className="flex items-center gap-3 mb-2">
+                      <h3 className="text-xl md:text-2xl font-bold">{disease.name}</h3>
+                      <Badge className="bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20">
+                        {disease.category}
+                      </Badge>
+                    </div>
+                    {"matchCount" in disease && (disease as any).matchCount > 0 && (
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                        <CheckCircle className="h-4 w-4 text-success" />
+                        <span>{(disease as any).matchCount} symptom{(disease as any).matchCount > 1 ? "s" : ""} matched</span>
                       </div>
-                    ))}
+                    )}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {"probability" in disease && (
+                      <Badge className={getProbabilityColor((disease as any).probability)}>
+                        Match: {(disease as any).probability}
+                      </Badge>
+                    )}
+                    <Badge className={getSeverityColor(disease.severity)} variant="outline">
+                      Severity: {disease.severity}
+                    </Badge>
                   </div>
                 </div>
 
-                <div className="mt-4 p-4 bg-muted/50 rounded-lg flex items-start gap-2">
-                  <Info className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 font-semibold text-accent">
+                      <AlertCircle className="h-5 w-5" />
+                      Symptoms
+                    </div>
+                    <ul className="space-y-2">
+                      {disease.symptoms.map((symptom, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm">
+                          <div className="h-1.5 w-1.5 rounded-full bg-accent mt-2 flex-shrink-0"></div>
+                          <span>{symptom}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 font-semibold text-success">
+                      <CheckCircle className="h-5 w-5" />
+                      Remedies
+                    </div>
+                    <ul className="space-y-2">
+                      {disease.remedies.map((remedy, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm">
+                          <div className="h-1.5 w-1.5 rounded-full bg-success mt-2 flex-shrink-0"></div>
+                          <span>{remedy}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 font-semibold text-primary">
+                      <Info className="h-5 w-5" />
+                      Prevention
+                    </div>
+                    <ul className="space-y-2">
+                      {disease.prevention.map((prevention, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm">
+                          <div className="h-1.5 w-1.5 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                          <span>{prevention}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="mt-6 p-4 bg-accent/5 rounded-lg flex items-start gap-3 border border-accent/20">
+                  <Info className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
                   <p className="text-sm text-muted-foreground">
-                    If symptoms persist or worsen, please consult with a healthcare professional immediately.
+                    If you experience these symptoms persistently or they worsen, please seek immediate medical attention from a qualified healthcare professional.
                   </p>
                 </div>
               </Card>
             ))}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
