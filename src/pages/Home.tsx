@@ -14,9 +14,9 @@ const Home = () => {
     },
     {
       icon: Utensils,
-      title: "Smart Meal Planning",
+      title: "Smart Diet Planning",
       description: "Get customized meal plans based on your health metrics and dietary needs",
-      link: "/meal-planner",
+      link: "/diet-planner",
       gradient: "from-secondary to-accent",
     },
     {
@@ -54,12 +54,14 @@ const Home = () => {
                 Personalized diet management, health tracking, and disease prediction powered by advanced analytics. Take control of your wellness journey today.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/health-metrics">
-                  <Button size="lg" className="gap-2 shadow-lg hover:shadow-xl transition-all">
-                    <TrendingUp className="h-5 w-5" />
-                    Get Started
-                  </Button>
-                </Link>
+                <Button 
+                  size="lg" 
+                  className="gap-2 shadow-lg hover:shadow-xl transition-all"
+                  onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  <TrendingUp className="h-5 w-5" />
+                  Get Started
+                </Button>
                 <Link to="/about">
                   <Button size="lg" variant="outline" className="gap-2">
                     Learn More
@@ -80,7 +82,7 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="container mx-auto px-4 py-20">
+      <section id="features" className="container mx-auto px-4 py-20">
         <div className="text-center space-y-4 mb-16 animate-fade-in">
           <h2 className="text-4xl font-bold">Powerful Health Features</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

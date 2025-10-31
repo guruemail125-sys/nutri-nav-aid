@@ -7,7 +7,7 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import HealthMetrics from "./pages/HealthMetrics";
-import MealPlanner from "./pages/MealPlanner";
+import DietPlanner from "./pages/DietPlanner";
 import SymptomChecker from "./pages/SymptomChecker";
 import DiseaseSearch from "./pages/DiseaseSearch";
 import About from "./pages/About";
@@ -28,7 +28,8 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/health-metrics" element={<HealthMetrics />} />
-              <Route path="/meal-planner" element={<MealPlanner />} />
+          <Route path="/diet-planner" element={<DietPlanner />} />
+          <Route path="/meal-planner" element={<DietPlanner />} />
               <Route path="/symptom-checker" element={<SymptomChecker />} />
               <Route path="/disease-search" element={<DiseaseSearch />} />
               <Route path="/about" element={<About />} />

@@ -49,6 +49,22 @@ export const diseases: Disease[] = [
     prevention: ["Vaccination", "Good hygiene", "Don't smoke", "Healthy lifestyle"],
     severity: "High",
   },
+  {
+    name: "Chronic Obstructive Pulmonary Disease (COPD)",
+    category: "Respiratory",
+    symptoms: ["Chronic cough", "Shortness of breath", "Wheezing", "Chest tightness", "Frequent respiratory infections", "Fatigue"],
+    remedies: ["Bronchodilators", "Inhaled steroids", "Oxygen therapy", "Pulmonary rehabilitation", "Quit smoking"],
+    prevention: ["Don't smoke", "Avoid air pollutants", "Regular exercise", "Get vaccinated"],
+    severity: "High",
+  },
+  {
+    name: "Sinusitis",
+    category: "Respiratory",
+    symptoms: ["Facial pain", "Nasal congestion", "Thick nasal discharge", "Reduced sense of smell", "Headache", "Cough"],
+    remedies: ["Nasal decongestants", "Saline nasal irrigation", "Steam inhalation", "Pain relievers", "Antibiotics if bacterial"],
+    prevention: ["Manage allergies", "Avoid irritants", "Stay hydrated", "Use humidifier"],
+    severity: "Low",
+  },
 
   // Cardiovascular Diseases
   {
@@ -82,6 +98,22 @@ export const diseases: Disease[] = [
     remedies: ["Medications", "Cardioversion", "Ablation", "Pacemaker", "Lifestyle changes"],
     prevention: ["Limit caffeine", "Reduce stress", "Avoid smoking", "Limit alcohol", "Regular checkups"],
     severity: "Medium",
+  },
+  {
+    name: "Stroke",
+    category: "Cardiovascular",
+    symptoms: ["Sudden numbness", "Confusion", "Trouble speaking", "Vision problems", "Severe headache", "Loss of balance"],
+    remedies: ["Emergency medical treatment", "Clot-busting drugs", "Surgery", "Rehabilitation therapy", "Medications"],
+    prevention: ["Control blood pressure", "Don't smoke", "Healthy diet", "Exercise", "Manage diabetes"],
+    severity: "High",
+  },
+  {
+    name: "Atherosclerosis",
+    category: "Cardiovascular",
+    symptoms: ["Chest pain", "Leg pain when walking", "Weakness", "Confusion if affecting brain", "Often no symptoms"],
+    remedies: ["Statins", "Blood pressure medications", "Lifestyle changes", "Angioplasty", "Surgery"],
+    prevention: ["Healthy diet", "Exercise", "Don't smoke", "Control cholesterol", "Manage diabetes"],
+    severity: "High",
   },
 
   // Metabolic & Endocrine Diseases
@@ -125,6 +157,22 @@ export const diseases: Disease[] = [
     prevention: ["Balanced diet", "Regular physical activity", "Adequate sleep", "Stress management"],
     severity: "Medium",
   },
+  {
+    name: "Metabolic Syndrome",
+    category: "Metabolic",
+    symptoms: ["High blood pressure", "High blood sugar", "Excess body fat around waist", "Abnormal cholesterol levels"],
+    remedies: ["Weight loss", "Exercise", "Medications", "Dietary changes", "Stress reduction"],
+    prevention: ["Healthy lifestyle", "Regular exercise", "Balanced diet", "Maintain healthy weight"],
+    severity: "High",
+  },
+  {
+    name: "Cushing's Syndrome",
+    category: "Endocrine",
+    symptoms: ["Weight gain", "Facial rounding", "Purple stretch marks", "Easy bruising", "Muscle weakness", "High blood pressure"],
+    remedies: ["Medications", "Surgery", "Radiation", "Lifestyle modifications"],
+    prevention: ["Careful use of corticosteroids", "Regular monitoring"],
+    severity: "High",
+  },
 
   // Gastrointestinal Diseases
   {
@@ -158,6 +206,38 @@ export const diseases: Disease[] = [
     remedies: ["Antiviral medications", "Rest", "Healthy diet", "Avoid alcohol", "Regular monitoring"],
     prevention: ["Vaccination", "Safe sex practices", "Don't share needles", "Screen blood products"],
     severity: "High",
+  },
+  {
+    name: "Crohn's Disease",
+    category: "Gastrointestinal",
+    symptoms: ["Diarrhea", "Abdominal pain", "Weight loss", "Fatigue", "Blood in stool", "Reduced appetite"],
+    remedies: ["Anti-inflammatory drugs", "Immune suppressors", "Biologics", "Surgery", "Nutritional therapy"],
+    prevention: ["No known prevention", "Healthy diet", "Stress management", "Don't smoke"],
+    severity: "High",
+  },
+  {
+    name: "Ulcerative Colitis",
+    category: "Gastrointestinal",
+    symptoms: ["Diarrhea with blood", "Abdominal pain", "Rectal bleeding", "Urgency to defecate", "Weight loss", "Fatigue"],
+    remedies: ["Anti-inflammatory medications", "Immune suppressors", "Biologics", "Surgery", "Dietary modifications"],
+    prevention: ["No known prevention", "Avoid NSAIDs", "Manage stress", "Balanced diet"],
+    severity: "High",
+  },
+  {
+    name: "Celiac Disease",
+    category: "Gastrointestinal",
+    symptoms: ["Diarrhea", "Bloating", "Gas", "Fatigue", "Weight loss", "Anemia", "Bone loss"],
+    remedies: ["Gluten-free diet", "Nutritional supplements", "Monitor for complications"],
+    prevention: ["No known prevention", "Early diagnosis", "Strict gluten-free diet"],
+    severity: "Medium",
+  },
+  {
+    name: "Gallstones",
+    category: "Gastrointestinal",
+    symptoms: ["Sudden abdominal pain", "Back pain", "Nausea", "Vomiting", "Indigestion", "Jaundice"],
+    remedies: ["Pain management", "Surgery to remove gallbladder", "Medications to dissolve stones"],
+    prevention: ["Maintain healthy weight", "Eat regular meals", "High-fiber diet", "Exercise regularly"],
+    severity: "Medium",
   },
 
   // Neurological Diseases
@@ -193,6 +273,30 @@ export const diseases: Disease[] = [
     prevention: ["Mental stimulation", "Physical activity", "Social engagement", "Healthy diet", "Manage cardiovascular risk"],
     severity: "High",
   },
+  {
+    name: "Multiple Sclerosis",
+    category: "Neurological",
+    symptoms: ["Numbness", "Weakness", "Vision problems", "Dizziness", "Fatigue", "Difficulty walking"],
+    remedies: ["Disease-modifying therapies", "Corticosteroids", "Physical therapy", "Medications for symptoms"],
+    prevention: ["No known prevention", "Vitamin D supplementation", "Avoid smoking"],
+    severity: "High",
+  },
+  {
+    name: "Peripheral Neuropathy",
+    category: "Neurological",
+    symptoms: ["Numbness in hands and feet", "Tingling", "Sharp pain", "Muscle weakness", "Loss of coordination"],
+    remedies: ["Treat underlying cause", "Pain medications", "Physical therapy", "Transcutaneous electrical nerve stimulation"],
+    prevention: ["Manage diabetes", "Avoid toxins", "Limit alcohol", "Balanced diet"],
+    severity: "Medium",
+  },
+  {
+    name: "Meningitis",
+    category: "Neurological",
+    symptoms: ["Severe headache", "Stiff neck", "High fever", "Nausea", "Confusion", "Sensitivity to light"],
+    remedies: ["Antibiotics or antivirals", "Hospitalization", "Supportive care", "Corticosteroids"],
+    prevention: ["Vaccination", "Good hygiene", "Avoid sharing utensils"],
+    severity: "High",
+  },
 
   // Musculoskeletal Diseases
   {
@@ -218,6 +322,30 @@ export const diseases: Disease[] = [
     remedies: ["Calcium and vitamin D supplements", "Medications", "Exercise", "Fall prevention"],
     prevention: ["Adequate calcium and vitamin D", "Weight-bearing exercise", "Avoid smoking", "Limit alcohol"],
     severity: "Medium",
+  },
+  {
+    name: "Gout",
+    category: "Musculoskeletal",
+    symptoms: ["Intense joint pain", "Inflammation", "Redness", "Limited range of motion", "Usually affects big toe"],
+    remedies: ["NSAIDs", "Colchicine", "Corticosteroids", "Lifestyle changes", "Medications to lower uric acid"],
+    prevention: ["Limit purine-rich foods", "Stay hydrated", "Maintain healthy weight", "Limit alcohol"],
+    severity: "Medium",
+  },
+  {
+    name: "Fibromyalgia",
+    category: "Musculoskeletal",
+    symptoms: ["Widespread pain", "Fatigue", "Sleep problems", "Memory issues", "Mood problems"],
+    remedies: ["Medications", "Physical therapy", "Counseling", "Stress reduction", "Exercise"],
+    prevention: ["Regular exercise", "Stress management", "Good sleep habits", "Healthy lifestyle"],
+    severity: "Medium",
+  },
+  {
+    name: "Tendinitis",
+    category: "Musculoskeletal",
+    symptoms: ["Pain near a joint", "Tenderness", "Mild swelling", "Worsens with movement"],
+    remedies: ["Rest", "Ice", "Pain relievers", "Physical therapy", "Corticosteroid injections"],
+    prevention: ["Warm up before exercise", "Proper technique", "Avoid repetitive stress", "Strengthen muscles"],
+    severity: "Low",
   },
 
   // Infectious Diseases
@@ -253,6 +381,38 @@ export const diseases: Disease[] = [
     prevention: ["Vaccination", "Avoid contact with infected", "Good hygiene"],
     severity: "Low",
   },
+  {
+    name: "Measles",
+    category: "Infectious",
+    symptoms: ["High fever", "Cough", "Runny nose", "Red eyes", "Rash", "White spots in mouth"],
+    remedies: ["Rest", "Hydration", "Fever reducers", "Vitamin A supplements", "Isolation"],
+    prevention: ["MMR vaccine", "Avoid contact with infected", "Good hygiene"],
+    severity: "Medium",
+  },
+  {
+    name: "Mumps",
+    category: "Infectious",
+    symptoms: ["Swollen salivary glands", "Fever", "Headache", "Muscle aches", "Fatigue", "Loss of appetite"],
+    remedies: ["Rest", "Pain relievers", "Cold or warm compresses", "Soft foods", "Stay hydrated"],
+    prevention: ["MMR vaccine", "Good hygiene", "Avoid sharing utensils"],
+    severity: "Low",
+  },
+  {
+    name: "Dengue Fever",
+    category: "Infectious",
+    symptoms: ["High fever", "Severe headache", "Pain behind eyes", "Joint pain", "Muscle pain", "Rash", "Mild bleeding"],
+    remedies: ["Rest", "Hydration", "Pain relievers (acetaminophen only)", "Hospital care if severe"],
+    prevention: ["Mosquito control", "Use repellent", "Wear protective clothing", "Eliminate standing water"],
+    severity: "High",
+  },
+  {
+    name: "Lyme Disease",
+    category: "Infectious",
+    symptoms: ["Bull's-eye rash", "Fever", "Headache", "Fatigue", "Joint pain", "Muscle aches"],
+    remedies: ["Antibiotics", "Pain relievers", "Rest", "Early treatment important"],
+    prevention: ["Avoid tick-infested areas", "Use insect repellent", "Check for ticks", "Wear protective clothing"],
+    severity: "Medium",
+  },
 
   // Allergies & Immune System
   {
@@ -279,6 +439,22 @@ export const diseases: Disease[] = [
     prevention: ["Moisturize regularly", "Avoid irritants", "Use mild soaps", "Manage stress", "Wear soft fabrics"],
     severity: "Medium",
   },
+  {
+    name: "Lupus",
+    category: "Autoimmune",
+    symptoms: ["Fatigue", "Joint pain", "Butterfly rash", "Fever", "Photosensitivity", "Kidney problems"],
+    remedies: ["Immunosuppressants", "Anti-inflammatory drugs", "Antimalarial drugs", "Corticosteroids"],
+    prevention: ["No known prevention", "Avoid sun exposure", "Manage stress", "Regular checkups"],
+    severity: "High",
+  },
+  {
+    name: "HIV/AIDS",
+    category: "Infectious",
+    symptoms: ["Flu-like illness initially", "Weight loss", "Fever", "Night sweats", "Fatigue", "Opportunistic infections"],
+    remedies: ["Antiretroviral therapy", "Prophylactic medications", "Treat opportunistic infections", "Healthy lifestyle"],
+    prevention: ["Safe sex practices", "Don't share needles", "Pre-exposure prophylaxis", "Post-exposure prophylaxis"],
+    severity: "High",
+  },
 
   // Mental Health
   {
@@ -296,6 +472,30 @@ export const diseases: Disease[] = [
     remedies: ["Cognitive behavioral therapy", "Medications", "Relaxation techniques", "Exercise", "Mindfulness"],
     prevention: ["Stress management", "Regular exercise", "Adequate sleep", "Limit caffeine", "Social support"],
     severity: "Medium",
+  },
+  {
+    name: "Bipolar Disorder",
+    category: "Mental Health",
+    symptoms: ["Mood swings", "Manic episodes", "Depressive episodes", "Energy changes", "Sleep disturbances", "Impulsive behavior"],
+    remedies: ["Mood stabilizers", "Antipsychotics", "Psychotherapy", "Lifestyle management"],
+    prevention: ["No known prevention", "Medication compliance", "Stress management", "Regular sleep schedule"],
+    severity: "High",
+  },
+  {
+    name: "Obsessive-Compulsive Disorder (OCD)",
+    category: "Mental Health",
+    symptoms: ["Intrusive thoughts", "Repetitive behaviors", "Anxiety", "Need for symmetry", "Fear of contamination"],
+    remedies: ["Cognitive behavioral therapy", "Exposure therapy", "Medications", "Support groups"],
+    prevention: ["Early intervention", "Stress management", "Healthy coping strategies"],
+    severity: "Medium",
+  },
+  {
+    name: "Post-Traumatic Stress Disorder (PTSD)",
+    category: "Mental Health",
+    symptoms: ["Flashbacks", "Nightmares", "Severe anxiety", "Avoidance", "Hypervigilance", "Mood changes"],
+    remedies: ["Trauma-focused therapy", "Medications", "Support groups", "Stress management"],
+    prevention: ["Early intervention after trauma", "Social support", "Professional help"],
+    severity: "High",
   },
 
   // Kidney & Urinary
@@ -315,6 +515,14 @@ export const diseases: Disease[] = [
     prevention: ["Stay hydrated", "Urinate frequently", "Wipe front to back", "Avoid harsh soaps", "Empty bladder after sex"],
     severity: "Low",
   },
+  {
+    name: "Kidney Stones",
+    category: "Renal",
+    symptoms: ["Severe pain in side and back", "Pain during urination", "Pink or brown urine", "Nausea", "Vomiting", "Frequent urination"],
+    remedies: ["Pain management", "Drink lots of water", "Medical procedures for large stones", "Alpha blockers"],
+    prevention: ["Stay hydrated", "Reduce salt intake", "Limit animal protein", "Avoid stone-forming foods"],
+    severity: "High",
+  },
 
   // Skin Diseases
   {
@@ -331,6 +539,98 @@ export const diseases: Disease[] = [
     symptoms: ["Whiteheads", "Blackheads", "Pimples", "Cysts", "Oily skin", "Scarring"],
     remedies: ["Topical treatments", "Antibiotics", "Retinoids", "Benzoyl peroxide", "Hormonal therapy"],
     prevention: ["Gentle cleansing", "Avoid touching face", "Remove makeup", "Use non-comedogenic products", "Manage stress"],
+    severity: "Low",
+  },
+  {
+    name: "Rosacea",
+    category: "Dermatological",
+    symptoms: ["Facial redness", "Visible blood vessels", "Bumps and pimples", "Eye problems", "Thickened skin"],
+    remedies: ["Topical medications", "Oral antibiotics", "Laser therapy", "Avoid triggers"],
+    prevention: ["Identify and avoid triggers", "Protect skin from sun", "Gentle skin care", "Avoid irritants"],
+    severity: "Low",
+  },
+  {
+    name: "Shingles",
+    category: "Dermatological",
+    symptoms: ["Pain", "Burning sensation", "Red rash", "Fluid-filled blisters", "Itching", "Fever"],
+    remedies: ["Antiviral medications", "Pain relievers", "Cool compresses", "Calamine lotion"],
+    prevention: ["Shingles vaccine", "Chickenpox vaccine for children"],
+    severity: "Medium",
+  },
+
+  // Cancer (Common Types)
+  {
+    name: "Lung Cancer",
+    category: "Cancer",
+    symptoms: ["Persistent cough", "Chest pain", "Shortness of breath", "Coughing up blood", "Weight loss", "Hoarseness"],
+    remedies: ["Surgery", "Chemotherapy", "Radiation therapy", "Targeted therapy", "Immunotherapy"],
+    prevention: ["Don't smoke", "Avoid secondhand smoke", "Test home for radon", "Avoid carcinogens", "Exercise"],
+    severity: "High",
+  },
+  {
+    name: "Breast Cancer",
+    category: "Cancer",
+    symptoms: ["Breast lump", "Change in breast shape", "Skin changes", "Nipple discharge", "Breast pain"],
+    remedies: ["Surgery", "Chemotherapy", "Radiation therapy", "Hormone therapy", "Targeted therapy"],
+    prevention: ["Regular screenings", "Maintain healthy weight", "Exercise", "Limit alcohol", "Breastfeed if possible"],
+    severity: "High",
+  },
+  {
+    name: "Colorectal Cancer",
+    category: "Cancer",
+    symptoms: ["Blood in stool", "Changes in bowel habits", "Abdominal pain", "Unexplained weight loss", "Fatigue"],
+    remedies: ["Surgery", "Chemotherapy", "Radiation therapy", "Targeted therapy", "Immunotherapy"],
+    prevention: ["Regular screening", "Healthy diet high in fiber", "Exercise", "Maintain healthy weight", "Limit red meat"],
+    severity: "High",
+  },
+  {
+    name: "Prostate Cancer",
+    category: "Cancer",
+    symptoms: ["Difficulty urinating", "Weak urine flow", "Blood in urine", "Pelvic discomfort", "Bone pain", "Erectile dysfunction"],
+    remedies: ["Active surveillance", "Surgery", "Radiation therapy", "Hormone therapy", "Chemotherapy"],
+    prevention: ["Healthy diet", "Exercise", "Maintain healthy weight", "Regular screening after age 50"],
+    severity: "High",
+  },
+
+  // Eye & Ear Diseases
+  {
+    name: "Cataracts",
+    category: "Ophthalmological",
+    symptoms: ["Clouded vision", "Difficulty seeing at night", "Light sensitivity", "Fading colors", "Double vision"],
+    remedies: ["Surgery to remove cataract", "Stronger eyeglasses temporarily", "Better lighting"],
+    prevention: ["Protect eyes from UV light", "Manage diabetes", "Don't smoke", "Regular eye exams"],
+    severity: "Medium",
+  },
+  {
+    name: "Glaucoma",
+    category: "Ophthalmological",
+    symptoms: ["Gradual vision loss", "Eye pain", "Halos around lights", "Redness", "Nausea"],
+    remedies: ["Eye drops", "Oral medications", "Laser therapy", "Surgery"],
+    prevention: ["Regular eye exams", "Control blood pressure", "Exercise", "Protect eyes from injury"],
+    severity: "High",
+  },
+  {
+    name: "Macular Degeneration",
+    category: "Ophthalmological",
+    symptoms: ["Blurred central vision", "Straight lines appear wavy", "Dark spots in vision", "Difficulty recognizing faces"],
+    remedies: ["Anti-VEGF injections", "Laser therapy", "Photodynamic therapy", "Low vision aids"],
+    prevention: ["Don't smoke", "Healthy diet rich in leafy greens", "Exercise", "Protect eyes from sunlight"],
+    severity: "High",
+  },
+  {
+    name: "Otitis Media (Ear Infection)",
+    category: "Otolaryngological",
+    symptoms: ["Ear pain", "Fluid drainage", "Hearing loss", "Fever", "Headache", "Loss of balance"],
+    remedies: ["Antibiotics", "Pain relievers", "Warm compress", "Ear drops"],
+    prevention: ["Breastfeed infants", "Avoid secondhand smoke", "Hand hygiene", "Stay up-to-date on vaccines"],
+    severity: "Low",
+  },
+  {
+    name: "Tinnitus",
+    category: "Otolaryngological",
+    symptoms: ["Ringing in ears", "Buzzing", "Hissing", "Clicking", "May worsen with stress"],
+    remedies: ["Treat underlying condition", "Sound therapy", "Hearing aids", "Counseling", "Medications"],
+    prevention: ["Protect hearing", "Limit loud noise exposure", "Manage stress", "Exercise"],
     severity: "Low",
   },
 ];

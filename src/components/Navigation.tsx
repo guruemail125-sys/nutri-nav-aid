@@ -1,20 +1,29 @@
 import { Link, useLocation } from "react-router-dom";
-import { Heart, Menu, X } from "lucide-react";
+import { Heart, Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 
 const Navigation = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navLinks = [
+  const mainLinks = [
     { path: "/", label: "Home" },
-    { path: "/health-metrics", label: "Health Metrics" },
-    { path: "/meal-planner", label: "Meal Planner" },
-    { path: "/symptom-checker", label: "Symptom Checker" },
-    { path: "/disease-search", label: "Disease Search" },
     { path: "/about", label: "About" },
     { path: "/contact", label: "Contact" },
+  ];
+
+  const serviceLinks = [
+    { path: "/health-metrics", label: "Health Metrics" },
+    { path: "/diet-planner", label: "Diet Planner" },
+    { path: "/symptom-checker", label: "Symptom Checker" },
+    { path: "/disease-search", label: "Disease Encyclopedia" },
   ];
 
   return (
@@ -30,7 +39,7 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
+            {mainLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -43,6 +52,27 @@ const Navigation = () => {
                 {link.label}
               </Link>
             ))}
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted transition-colors">
+                Services
+                <ChevronDown className="h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                {serviceLinks.map((link) => (
+                  <DropdownMenuItem key={link.path} asChild>
+                    <Link 
+                      to={link.path} 
+                      className={`cursor-pointer ${
+                        location.pathname === link.path ? "bg-primary/10" : ""
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Mobile Menu Button */}
@@ -59,12 +89,31 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-border animate-fade-in">
-            {navLinks.map((link) => (
+            {mainLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                  location.pathname === link.path
+                    ? "bg-primary text-primary-foreground"
+                    : "text-foreground/80 hover:text-foreground hover:bg-muted"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            
+            <div className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              Services
+            </div>
+            
+            {serviceLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`block px-6 py-3 rounded-lg text-sm font-medium transition-colors ${
                   location.pathname === link.path
                     ? "bg-primary text-primary-foreground"
                     : "text-foreground/80 hover:text-foreground hover:bg-muted"

@@ -4,12 +4,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Utensils, Apple, Clock, Flame, TrendingUp, Filter } from "lucide-react";
+import { Utensils, Apple, Clock, Flame, TrendingUp, Filter, ChefHat, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 import mealPlanningImage from "@/assets/meal-planning.jpg";
 import { meals, Meal } from "@/data/meals";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
-const MealPlanner = () => {
+const DietPlanner = () => {
   const [preferences, setPreferences] = useState({
     calories: "",
     protein: "",
@@ -17,6 +24,8 @@ const MealPlanner = () => {
   });
   const [showFiltered, setShowFiltered] = useState(false);
   const [filteredMeals, setFilteredMeals] = useState<Meal[]>([]);
+  const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
+  const [showRecipe, setShowRecipe] = useState(false);
 
   const handleGeneratePlan = () => {
     if (!preferences.calories && !preferences.protein && !preferences.dietType) {
@@ -26,7 +35,7 @@ const MealPlanner = () => {
 
     const calorieTarget = parseInt(preferences.calories) || 0;
     const proteinTarget = parseInt(preferences.protein) || 0;
-    const caloriePerMeal = calorieTarget / 3; // Rough estimate per meal
+    const caloriePerMeal = calorieTarget / 3;
     const proteinPerMeal = proteinTarget / 3;
 
     const filtered = meals.filter(meal => {
@@ -67,6 +76,11 @@ const MealPlanner = () => {
     setFilteredMeals([]);
   };
 
+  const handleViewRecipe = (meal: Meal) => {
+    setSelectedMeal(meal);
+    setShowRecipe(true);
+  };
+
   const displayMeals = showFiltered ? filteredMeals : meals;
 
   return (
@@ -76,8 +90,8 @@ const MealPlanner = () => {
           <Utensils className="h-4 w-4 text-primary" />
           <span className="text-sm font-medium text-primary">AI-Powered Nutrition Planning</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-2">Smart Meal Planner</h1>
-        <p className="text-muted-foreground text-lg">Discover {meals.length}+ healthy meals tailored to your dietary needs</p>
+        <h1 className="text-4xl md:text-5xl font-bold mb-2">Smart Diet Planner</h1>
+        <p className="text-muted-foreground text-lg">Discover {meals.length}+ healthy meals with step-by-step recipes</p>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6">
@@ -163,7 +177,7 @@ const MealPlanner = () => {
           </Card>
 
           <div className="rounded-xl overflow-hidden border border-border shadow-lg">
-            <img src={mealPlanningImage} alt="Meal Planning" className="w-full h-56 object-cover" />
+            <img src={mealPlanningImage} alt="Diet Planning" className="w-full h-56 object-cover" />
             <div className="p-4 bg-gradient-to-br from-primary/10 to-secondary/10">
               <p className="text-sm font-medium">💡 Nutrition Tip</p>
               <p className="text-xs text-muted-foreground mt-1">Balance your meals with protein, carbs, and healthy fats for optimal health</p>
@@ -253,12 +267,22 @@ const MealPlanner = () => {
                   </div>
                 </div>
 
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {meal.dietTypes.map((type, i) => (
-                    <Badge key={i} variant="outline" className="text-xs">
-                      {type}
-                    </Badge>
-                  ))}
+                <div className="mt-4 flex items-center justify-between">
+                  <div className="flex flex-wrap gap-1.5">
+                    {meal.dietTypes.map((type, i) => (
+                      <Badge key={i} variant="outline" className="text-xs">
+                        {type}
+                      </Badge>
+                    ))}
+                  </div>
+                  <Button 
+                    onClick={() => handleViewRecipe(meal)} 
+                    size="sm" 
+                    className="gap-2"
+                  >
+                    <ChefHat className="h-4 w-4" />
+                    View Recipe
+                  </Button>
                 </div>
               </Card>
             ))}
@@ -276,8 +300,80 @@ const MealPlanner = () => {
           )}
         </div>
       </div>
+
+      {/* Recipe Dialog */}
+      <Dialog open={showRecipe} onOpenChange={setShowRecipe}>
+        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl flex items-center gap-2">
+              <ChefHat className="h-6 w-6 text-primary" />
+              {selectedMeal?.name}
+            </DialogTitle>
+            <DialogDescription className="text-base">
+              {selectedMeal?.description}
+            </DialogDescription>
+          </DialogHeader>
+          
+          {selectedMeal && (
+            <div className="space-y-6 mt-4">
+              <div className="grid grid-cols-4 gap-4 p-4 bg-muted/30 rounded-lg">
+                <div className="text-center">
+                  <div className="font-semibold text-accent">{selectedMeal.calories}</div>
+                  <div className="text-xs text-muted-foreground">Calories</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-semibold text-primary">{selectedMeal.protein}g</div>
+                  <div className="text-xs text-muted-foreground">Protein</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-semibold text-success">{selectedMeal.carbs}g</div>
+                  <div className="text-xs text-muted-foreground">Carbs</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-semibold text-secondary">{selectedMeal.fats}g</div>
+                  <div className="text-xs text-muted-foreground">Fats</div>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <Clock className="h-5 w-5 text-primary" />
+                  <h3 className="text-lg font-semibold">Preparation Time</h3>
+                </div>
+                <p className="text-muted-foreground">{selectedMeal.prepTime} minutes</p>
+              </div>
+
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <CheckCircle className="h-5 w-5 text-success" />
+                  <h3 className="text-lg font-semibold">Step-by-Step Instructions</h3>
+                </div>
+                <ol className="space-y-3">
+                  {selectedMeal.instructions.map((instruction, index) => (
+                    <li key={index} className="flex gap-3">
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary text-sm font-semibold flex items-center justify-center">
+                        {index + 1}
+                      </span>
+                      <span className="text-sm flex-1">{instruction}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              <div className="pt-4 border-t">
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="outline">Type: {selectedMeal.type}</Badge>
+                  {selectedMeal.dietTypes.map((type, i) => (
+                    <Badge key={i} variant="secondary">{type}</Badge>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
 
-export default MealPlanner;
+export default DietPlanner;
