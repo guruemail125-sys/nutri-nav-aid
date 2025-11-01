@@ -24,11 +24,11 @@ const Footer = () => {
               <Link to="/" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
                 Home
               </Link>
-              <Link to="/health-metrics" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-                Health Metrics
+              <Link to="/diet-planner" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
+                Diet Planner
               </Link>
-              <Link to="/meal-planner" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-                Meal Planner
+              <Link to="/disease-search" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
+                Disease Encyclopedia
               </Link>
             </div>
           </div>

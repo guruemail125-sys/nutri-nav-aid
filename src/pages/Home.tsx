@@ -6,13 +6,6 @@ import heroImage from "@/assets/hero-health.jpg";
 const Home = () => {
   const features = [
     {
-      icon: Activity,
-      title: "Health Metrics Tracking",
-      description: "Monitor blood pressure, heart rate, and sugar levels with personalized insights",
-      link: "/health-metrics",
-      gradient: "from-primary to-primary-glow",
-    },
-    {
       icon: Utensils,
       title: "Smart Diet Planning",
       description: "Get customized meal plans based on your health metrics and dietary needs",
@@ -47,7 +40,7 @@ const Home = () => {
                 Personalized diet management, health tracking, and disease prediction powered by advanced analytics. Take control of your wellness journey today.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/health-metrics">
+                <Link to="/diet-planner">
                   <Button 
                     size="lg" 
                     className="gap-2 shadow-lg hover:shadow-xl transition-all"
@@ -129,7 +122,7 @@ const Home = () => {
           <p className="text-lg text-muted-foreground">
             Join thousands of users who have taken control of their wellness journey with HealthCare Pro
           </p>
-          <Link to="/health-metrics">
+          <Link to="/diet-planner">
             <Button size="lg" className="gap-2 shadow-lg hover:shadow-xl">
               <Heart className="h-5 w-5" />
               Start Your Journey
