@@ -43,7 +43,7 @@ const Home = () => {
                 <Button 
                   size="lg" 
                   className="gap-2 shadow-lg hover:shadow-xl transition-all"
-                  onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
                 >
                   <TrendingUp className="h-5 w-5" />
                   Get Started
@@ -68,9 +68,9 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="container mx-auto px-4 py-20">
+      <section id="services" className="container mx-auto px-4 py-20">
         <div className="text-center space-y-4 mb-16 animate-fade-in">
-          <h2 className="text-4xl font-bold">Powerful Health Features</h2>
+          <h2 className="text-4xl font-bold">Our Services</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Everything you need to monitor, manage, and improve your health in one comprehensive platform
           </p>
