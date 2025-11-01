@@ -22,7 +22,6 @@ const Navigation = () => {
   const serviceLinks = [
     { path: "/health-metrics", label: "Health Metrics" },
     { path: "/diet-planner", label: "Diet Planner" },
-    { path: "/symptom-checker", label: "Symptom Checker" },
     { path: "/disease-search", label: "Disease Encyclopedia" },
   ];
 
