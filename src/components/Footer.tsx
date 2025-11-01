@@ -30,9 +30,6 @@ const Footer = () => {
               <Link to="/meal-planner" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
                 Meal Planner
               </Link>
-              <Link to="/symptom-checker" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-                Symptom Checker
-              </Link>
             </div>
           </div>
 

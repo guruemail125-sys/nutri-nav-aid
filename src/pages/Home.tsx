@@ -20,13 +20,6 @@ const Home = () => {
       gradient: "from-secondary to-accent",
     },
     {
-      icon: Search,
-      title: "Symptom Checker",
-      description: "Identify potential health conditions based on your symptoms with AI assistance",
-      link: "/symptom-checker",
-      gradient: "from-success to-primary",
-    },
-    {
       icon: Shield,
       title: "Disease Database",
       description: "Search comprehensive information about diseases, symptoms, and remedies",
