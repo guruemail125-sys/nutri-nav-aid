@@ -28,7 +28,7 @@ const Footer = () => {
                 Diet Planner
               </Link>
               <Link to="/disease-search" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-                Disease Encyclopedia
+                Diet Analyzer
               </Link>
             </div>
           </div>

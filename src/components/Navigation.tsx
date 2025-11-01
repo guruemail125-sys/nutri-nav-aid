@@ -21,7 +21,7 @@ const Navigation = () => {
 
   const serviceLinks = [
     { path: "/diet-planner", label: "Diet Planner" },
-    { path: "/disease-search", label: "Disease Encyclopedia" },
+    { path: "/disease-search", label: "Diet Analyzer" },
   ];
 
   return (

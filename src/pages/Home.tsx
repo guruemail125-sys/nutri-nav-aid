@@ -14,7 +14,7 @@ const Home = () => {
     },
     {
       icon: Shield,
-      title: "Disease Database",
+      title: "Diet Analyzer",
       description: "Search comprehensive information about diseases, symptoms, and remedies",
       link: "/disease-search",
       gradient: "from-accent to-secondary",
