@@ -40,15 +40,14 @@ const Home = () => {
                 Personalized diet management, health tracking, and disease prediction powered by advanced analytics. Take control of your wellness journey today.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/diet-planner">
-                  <Button 
-                    size="lg" 
-                    className="gap-2 shadow-lg hover:shadow-xl transition-all"
-                  >
-                    <TrendingUp className="h-5 w-5" />
-                    Get Started
-                  </Button>
-                </Link>
+                <Button 
+                  size="lg" 
+                  className="gap-2 shadow-lg hover:shadow-xl transition-all"
+                  onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  <TrendingUp className="h-5 w-5" />
+                  Get Started
+                </Button>
                 <Link to="/about">
                   <Button size="lg" variant="outline" className="gap-2">
                     Learn More
