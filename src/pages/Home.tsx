@@ -25,7 +25,7 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 hero-gradient opacity-10"></div>
+        <div className="absolute inset-0 hero-gradient opacity-10 pointer-events-none"></div>
         <div className="container mx-auto px-4 py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in">
@@ -40,14 +40,20 @@ const Home = () => {
                 Personalized diet management, health tracking, and disease prediction powered by advanced analytics. Take control of your wellness journey today.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button asChild 
-                  size="lg" 
-                  className="gap-2 shadow-lg hover:shadow-xl transition-all"
+                <Button
+                  size="lg"
+                  className="gap-2 shadow-lg hover:shadow-xl transition-all relative z-10"
+                  onClick={() => {
+                    const el = document.getElementById('services');
+                    if (el) {
+                      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                      window.location.hash = 'services';
+                    }
+                  }}
                 >
-                  <a href="#services">
-                    <TrendingUp className="h-5 w-5" />
-                    Get Started
-                  </a>
+                  <TrendingUp className="h-5 w-5" />
+                  Get Started
                 </Button>
                 <Link to="/about">
                   <Button size="lg" variant="outline" className="gap-2">
