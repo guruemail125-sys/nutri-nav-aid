@@ -37,7 +37,7 @@ const Home = () => {
                 Manage Your Health <span className="text-gradient">Intelligently</span>
               </h1>
               <p className="text-lg text-muted-foreground">
-                Personalized diet management, health tracking, and disease prediction powered by advanced analytics. Take control of your wellness journey today.
+                Personalized diet management and diet analyzer powered by advanced analytics. Take control of your wellness journey today.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button
