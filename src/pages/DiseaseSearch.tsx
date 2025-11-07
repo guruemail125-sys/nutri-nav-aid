@@ -30,9 +30,9 @@ const DiseaseSearch = () => {
       <div className="mb-8 animate-fade-in text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4">
           <BookOpen className="h-4 w-4 text-primary" />
-          <span className="text-sm font-medium text-primary">Comprehensive Medical Knowledge Base</span>
+          <span className="text-sm font-medium text-primary">Comprehensive Diet & Nutrition Analysis</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-2">Disease Encyclopedia</h1>
+        <h1 className="text-4xl md:text-5xl font-bold mb-2">Diet Analyzer</h1>
         <p className="text-muted-foreground text-lg">Explore detailed information about {diseases.length}+ diseases</p>
       </div>
 
