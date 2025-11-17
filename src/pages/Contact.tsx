@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, Send } from "lucide-react";
 import { toast } from "sonner";
 
 const Contact = () => {
@@ -99,8 +99,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Email</h3>
-                  <p className="text-muted-foreground">info@healthcarepro.com</p>
-                  <p className="text-muted-foreground">support@healthcarepro.com</p>
+                  <p className="text-muted-foreground">1kg23cb002_ajith@kssem.edu.in</p>
                 </div>
               </div>
 
@@ -110,19 +109,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Phone</h3>
-                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                  <p className="text-muted-foreground">Mon-Fri: 9AM - 6PM EST</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-success/10">
-                  <MapPin className="h-6 w-6 text-success" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Office</h3>
-                  <p className="text-muted-foreground">123 Health Street</p>
-                  <p className="text-muted-foreground">Wellness City, WC 12345</p>
+                  <p className="text-muted-foreground">7204660120</p>
+                  <p className="text-muted-foreground">Mon-Fri: 9AM - 6PM</p>
                 </div>
               </div>
             </div>
