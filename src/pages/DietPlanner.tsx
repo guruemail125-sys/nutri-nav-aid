@@ -96,7 +96,7 @@ const DietPlanner = () => {
 
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1 space-y-6 animate-slide-up">
-          <Card className="p-6 bg-gradient-to-br from-card to-muted/20 border-primary/20 sticky top-4">
+          <Card className="p-6 bg-gradient-to-br from-card to-muted/20 border-primary/20">
             <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
               <Filter className="h-5 w-5 text-primary" />
               Set Your Preferences
@@ -176,7 +176,7 @@ const DietPlanner = () => {
             )}
           </Card>
 
-          <div className="rounded-xl overflow-hidden border border-border shadow-lg">
+          <div className="rounded-xl overflow-hidden border border-border shadow-lg sticky top-4">
             <img src={mealPlanningImage} alt="Diet Planning" className="w-full h-56 object-cover" />
             <div className="p-4 bg-gradient-to-br from-primary/10 to-secondary/10">
               <p className="text-sm font-medium">💡 Nutrition Tip</p>
