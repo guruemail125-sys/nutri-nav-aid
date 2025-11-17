@@ -1,4 +1,4 @@
-import { Heart, Mail, Phone, MapPin } from "lucide-react";
+import { Heart, Mail, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -53,15 +53,11 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 text-primary" />
-                <span>info@healthcarepro.com</span>
+                <span>1kg23cb002_ajith@kssem.edu.in</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4 text-primary" />
-                <span>+1 (555) 123-4567</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <MapPin className="h-4 w-4 text-primary" />
-                <span>123 Health St, Wellness City</span>
+                <span>7204660120</span>
               </div>
             </div>
           </div>
