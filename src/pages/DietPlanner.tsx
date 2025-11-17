@@ -185,107 +185,227 @@ const DietPlanner = () => {
           </div>
         </div>
 
-        <div className="lg:col-span-2 space-y-6">
-          <div className="flex items-center justify-between animate-slide-up">
-            <h2 className="text-2xl font-bold">
-              {showFiltered ? "Recommended Meals" : "All Available Meals"}
-            </h2>
-            <Badge variant="secondary" className="text-sm">
-              {displayMeals.length} Meals
-            </Badge>
-          </div>
+        <div className="lg:col-span-2 space-y-8">
+          {/* Vegetarian Section */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between animate-slide-up">
+              <h2 className="text-2xl font-bold text-success">
+                🌱 Vegetarian Meals
+              </h2>
+              <Badge variant="secondary" className="text-sm bg-success/10 text-success border-success/20">
+                {displayMeals.filter(meal => meal.dietTypes.includes("Vegetarian") || meal.tags.includes("Vegetarian")).length} Meals
+              </Badge>
+            </div>
 
-          <div className="grid gap-4 animate-slide-up" style={{ animationDelay: "100ms" }}>
-            {displayMeals.map((meal, index) => (
-              <Card 
-                key={index} 
-                className="p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-muted/10"
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold mb-2">{meal.name}</h3>
-                    <p className="text-sm text-muted-foreground mb-3">{meal.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {meal.tags.map((tag, i) => (
-                        <Badge key={i} variant="secondary" className="text-xs">
-                          {tag}
+            <div className="grid gap-4 animate-slide-up" style={{ animationDelay: "100ms" }}>
+              {displayMeals.filter(meal => meal.dietTypes.includes("Vegetarian") || meal.tags.includes("Vegetarian")).map((meal, index) => (
+                <Card 
+                  key={`veg-${index}`} 
+                  className="p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-muted/10"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
+                    <div className="flex-1">
+                      <h3 className="text-xl font-semibold mb-2">{meal.name}</h3>
+                      <p className="text-sm text-muted-foreground mb-3">{meal.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {meal.tags.map((tag, i) => (
+                          <Badge key={i} variant="secondary" className="text-xs">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    <Badge className="bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20 whitespace-nowrap">
+                      {meal.type}
+                    </Badge>
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 bg-muted/30 rounded-lg">
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-lg bg-accent/10">
+                        <Flame className="h-4 w-4 text-accent" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold">{meal.calories}</div>
+                        <div className="text-xs text-muted-foreground">Calories</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-lg bg-primary/10">
+                        <Apple className="h-4 w-4 text-primary" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold">{meal.protein}g</div>
+                        <div className="text-xs text-muted-foreground">Protein</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-lg bg-success/10">
+                        <TrendingUp className="h-4 w-4 text-success" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold">{meal.carbs}g</div>
+                        <div className="text-xs text-muted-foreground">Carbs</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-lg bg-secondary/10">
+                        <Apple className="h-4 w-4 text-secondary" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold">{meal.fats}g</div>
+                        <div className="text-xs text-muted-foreground">Fats</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-lg bg-muted">
+                        <Clock className="h-4 w-4 text-foreground" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold">{meal.prepTime}min</div>
+                        <div className="text-xs text-muted-foreground">Prep Time</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex items-center justify-between">
+                    <div className="flex flex-wrap gap-1.5">
+                      {meal.dietTypes.map((type, i) => (
+                        <Badge key={i} variant="outline" className="text-xs">
+                          {type}
                         </Badge>
                       ))}
                     </div>
+                    <Button 
+                      onClick={() => handleViewRecipe(meal)} 
+                      size="sm" 
+                      className="gap-2"
+                    >
+                      <ChefHat className="h-4 w-4" />
+                      View Recipe
+                    </Button>
                   </div>
-                  <Badge className="bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20 whitespace-nowrap">
-                    {meal.type}
-                  </Badge>
-                </div>
+                </Card>
+              ))}
+            </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 bg-muted/30 rounded-lg">
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-lg bg-accent/10">
-                      <Flame className="h-4 w-4 text-accent" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold">{meal.calories}</div>
-                      <div className="text-xs text-muted-foreground">Calories</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      <Apple className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold">{meal.protein}g</div>
-                      <div className="text-xs text-muted-foreground">Protein</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-lg bg-success/10">
-                      <TrendingUp className="h-4 w-4 text-success" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold">{meal.carbs}g</div>
-                      <div className="text-xs text-muted-foreground">Carbs</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-lg bg-secondary/10">
-                      <Apple className="h-4 w-4 text-secondary" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold">{meal.fats}g</div>
-                      <div className="text-xs text-muted-foreground">Fats</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-lg bg-muted">
-                      <Clock className="h-4 w-4 text-foreground" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold">{meal.prepTime}min</div>
-                      <div className="text-xs text-muted-foreground">Prep Time</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4 flex items-center justify-between">
-                  <div className="flex flex-wrap gap-1.5">
-                    {meal.dietTypes.map((type, i) => (
-                      <Badge key={i} variant="outline" className="text-xs">
-                        {type}
-                      </Badge>
-                    ))}
-                  </div>
-                  <Button 
-                    onClick={() => handleViewRecipe(meal)} 
-                    size="sm" 
-                    className="gap-2"
-                  >
-                    <ChefHat className="h-4 w-4" />
-                    View Recipe
-                  </Button>
-                </div>
+            {displayMeals.filter(meal => meal.dietTypes.includes("Vegetarian") || meal.tags.includes("Vegetarian")).length === 0 && (
+              <Card className="p-8 text-center bg-gradient-to-br from-card to-muted/20">
+                <p className="text-muted-foreground">No vegetarian meals found with current preferences</p>
               </Card>
-            ))}
+            )}
+          </div>
+
+          {/* Non-Vegetarian Section */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between animate-slide-up">
+              <h2 className="text-2xl font-bold text-destructive">
+                🍖 Non-Vegetarian Meals
+              </h2>
+              <Badge variant="secondary" className="text-sm bg-destructive/10 text-destructive border-destructive/20">
+                {displayMeals.filter(meal => !meal.dietTypes.includes("Vegetarian") && !meal.tags.includes("Vegetarian")).length} Meals
+              </Badge>
+            </div>
+
+            <div className="grid gap-4 animate-slide-up" style={{ animationDelay: "100ms" }}>
+              {displayMeals.filter(meal => !meal.dietTypes.includes("Vegetarian") && !meal.tags.includes("Vegetarian")).map((meal, index) => (
+                <Card 
+                  key={`non-veg-${index}`} 
+                  className="p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-muted/10"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
+                    <div className="flex-1">
+                      <h3 className="text-xl font-semibold mb-2">{meal.name}</h3>
+                      <p className="text-sm text-muted-foreground mb-3">{meal.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {meal.tags.map((tag, i) => (
+                          <Badge key={i} variant="secondary" className="text-xs">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    <Badge className="bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20 whitespace-nowrap">
+                      {meal.type}
+                    </Badge>
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 bg-muted/30 rounded-lg">
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-lg bg-accent/10">
+                        <Flame className="h-4 w-4 text-accent" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold">{meal.calories}</div>
+                        <div className="text-xs text-muted-foreground">Calories</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-lg bg-primary/10">
+                        <Apple className="h-4 w-4 text-primary" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold">{meal.protein}g</div>
+                        <div className="text-xs text-muted-foreground">Protein</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-lg bg-success/10">
+                        <TrendingUp className="h-4 w-4 text-success" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold">{meal.carbs}g</div>
+                        <div className="text-xs text-muted-foreground">Carbs</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-lg bg-secondary/10">
+                        <Apple className="h-4 w-4 text-secondary" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold">{meal.fats}g</div>
+                        <div className="text-xs text-muted-foreground">Fats</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-lg bg-muted">
+                        <Clock className="h-4 w-4 text-foreground" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold">{meal.prepTime}min</div>
+                        <div className="text-xs text-muted-foreground">Prep Time</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex items-center justify-between">
+                    <div className="flex flex-wrap gap-1.5">
+                      {meal.dietTypes.map((type, i) => (
+                        <Badge key={i} variant="outline" className="text-xs">
+                          {type}
+                        </Badge>
+                      ))}
+                    </div>
+                    <Button 
+                      onClick={() => handleViewRecipe(meal)} 
+                      size="sm" 
+                      className="gap-2"
+                    >
+                      <ChefHat className="h-4 w-4" />
+                      View Recipe
+                    </Button>
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            {displayMeals.filter(meal => !meal.dietTypes.includes("Vegetarian") && !meal.tags.includes("Vegetarian")).length === 0 && (
+              <Card className="p-8 text-center bg-gradient-to-br from-card to-muted/20">
+                <p className="text-muted-foreground">No non-vegetarian meals found with current preferences</p>
+              </Card>
+            )}
           </div>
 
           {displayMeals.length === 0 && (
